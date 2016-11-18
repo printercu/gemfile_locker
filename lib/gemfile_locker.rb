@@ -1,4 +1,4 @@
-require "gemfile_locker/version"
+require 'gemfile_locker/version'
 
 module GemfileLocker
   # Your code goes here...
