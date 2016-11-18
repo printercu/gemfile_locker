@@ -1,5 +1,9 @@
 # GemfileLocker
 
+[![Gem Version](https://badge.fury.io/rb/gemfile_locker.svg)](http://badge.fury.io/rb/gemfile_locker)
+[![Code Climate](https://codeclimate.com/github/printercu/gemfile_locker/badges/gpa.svg)](https://codeclimate.com/github/printercu/gemfile_locker)
+[![Build Status](https://travis-ci.org/printercu/gemfile_locker.svg)](https://travis-ci.org/printercu/gemfile_locker)
+
 Tool to manage Gemfile. Lock and unlock all dependencies for safe `bundle update`.
 
 GemfileLocker can lock all dependencies strictly or semi-strictly (with `~>`),
