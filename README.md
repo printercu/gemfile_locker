@@ -25,7 +25,23 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+gemfile_locker help
+
+gemfile_locker lock # Lock all missing versions
+
+  Options:
+  --loose/-l [full|patch|minor|major] # Lock with ~>
+  --force/-f  # Lock all gems
+  --skip/-s   # Skip this gems
+  --only/-o   # Lock only this gems
+
+gemfile_locker unlock # unlock all
+
+  Options:
+  --skip/-s   # Skip this gems
+  --only/-o   # Unlock only this gems
+```
 
 ## Development
 

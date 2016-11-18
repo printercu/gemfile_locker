@@ -10,8 +10,9 @@ group :development do
 
   gem 'rspec', '~> 3.5.0'
   gem 'rspec-its', '~> 1.1.0'
+  gem 'aruba', '~> 0.14.2'
 
   gem 'rubocop', '~> 0.37.0'
 
-  gem 'coveralls', '~> 0.8.2', require: false
+  gem 'coveralls', '~> 0.8.2'
 end

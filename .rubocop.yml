@@ -1,3 +1,8 @@
+AllCops:
+  Exclude:
+  - tmp/**/*
+  - spec/fixtures/*
+
 Style/Alias: {Enabled: false}
 Style/AlignParameters:
   # Disable, till rubocop supports combination of styles.

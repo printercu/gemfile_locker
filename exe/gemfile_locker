@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
 
 require 'gemfile_locker'
+GemfileLocker::CLI.start(ARGV)

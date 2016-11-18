@@ -1,0 +1,14 @@
+source 'https://rubygems.org'
+
+gemspec
+
+gem 'gem-1'
+gem 'gem-2', '~> 2.3.0'
+gem 'gem-3', require: false
+gem 'gem-4', '4', platforms: [:mri],
+  require: false
+
+group :group do
+  gem 'gem-5'
+end
+
