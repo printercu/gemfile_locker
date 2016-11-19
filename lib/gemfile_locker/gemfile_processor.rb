@@ -46,7 +46,7 @@ module GemfileLocker
     def process_gems(string)
       string.gsub(GEM_LINE_REGEX) do
         match = Regexp.last_match
-        data = GEM_MATCH_FIELDS.map { |x| [x, match[x]] }.to_h
+        data = Hash[GEM_MATCH_FIELDS.map { |x| [x, match[x]] }]
         result = yield data
         result ||= data
         GEM_MATCH_FIELDS.map { |x| result[x] }.join
