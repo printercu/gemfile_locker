@@ -28,21 +28,25 @@ Or install it yourself as:
 ## Usage
 
 ```
-gemfile_locker help
+gemfile_locker help [COMMAND]
 
-gemfile_locker lock # Lock all missing versions
+gemfile_locker lock [gem ...] [options]   # Lock all missing versions or specified gems.
 
-  Options:
-  --loose/-l [full|patch|minor|major] # Lock with ~>
-  --force/-f  # Lock all gems
-  --skip/-s   # Skip this gems
-  --only/-o   # Lock only this gems
+Options:
+  -l, [--loose=LOOSE]           # Lock with `~>`. Optionaly provide level (default to patch)
+                                # Possible values: major, minor, patch, full
+  -e, [--except=one two three]  # List of gems to skip
+  -f, [--force]                 # Overwrite version definitions
+                                # (By default it adds only missing version definitions)
+  -g, [--gemfile=GEMFILE]       # Path to gemfile
+                                # Default: Gemfile
 
-gemfile_locker unlock # unlock all
+gemfile_locker unlock [gem ...] [options] # Unock all or specified gems.
 
-  Options:
-  --skip/-s   # Skip this gems
-  --only/-o   # Unlock only this gems
+Options:
+  -e, [--except=one two three]  # List of gems to skip
+  -g, [--gemfile=GEMFILE]       # Path to gemfile
+                                # Default: Gemfile
 ```
 
 ## Development
