@@ -2,8 +2,8 @@ module GemfileLocker
   class Unlocker < GemfileProcessor
     attr_reader :lockfile
 
-    def process_gem(data)
-      set_gem_version(data, nil)
+    def process_gem(gem_entry)
+      gem_entry.unlock
     end
   end
 end

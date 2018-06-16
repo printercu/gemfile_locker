@@ -20,14 +20,15 @@ module GemfileLocker
       @bundler_specs ||= Bundler::LockfileParser.new(lockfile).specs
     end
 
-    def process_gem(data)
-      name = data[:name]
-      locked = bundler_specs.find { |x| x.name == name }
-      locked && set_gem_version(data, prepare_version(locked.version))
+    def process_gem(gem_entry)
+      name = gem_entry.name
+      spec = bundler_specs.find { |x| x.name == name }
+      return unless spec
+      gem_entry.lock(version: prepare_version(spec.version))
     end
 
-    def skip_gem?(data)
-      super || data[:version] && !options[:force]
+    def skip_gem?(gem_entry)
+      super || gem_entry.locked? && !options[:force]
     end
 
     private
