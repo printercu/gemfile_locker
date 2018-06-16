@@ -14,5 +14,17 @@ RSpec.describe GemfileLocker::Unlocker do
       let(:options) { {except: ['gem-2']} }
       its(:call) { should eq "gem 'gem-1', require: false\n  gem 'gem-2', '2'" }
     end
+
+    context 'and gem has git ref' do
+      it 'removes ref' do
+        expect(subject[<<-RUBY.strip_heredoc]).to eq <<-RUBY.strip_heredoc
+          gem 'gem-3', git: 'smth', ref: '333', require: false
+          gem 'gem-4', ref: '444', branch: 'other'
+        RUBY
+          gem 'gem-3', git: 'smth', require: false
+          gem 'gem-4', branch: 'other'
+        RUBY
+      end
+    end
   end
 end

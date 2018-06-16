@@ -1,5 +1,3 @@
-require 'aruba/extensions/string/strip'
-
 RSpec.describe GemfileLocker::Locker do
   let(:lockfile) { <<-TXT.strip_heredoc }
     GEM
@@ -10,6 +8,18 @@ RSpec.describe GemfileLocker::Locker do
           gem-2 (~> 2.2.2)
         gem-2 (2.3.4)
 
+    GIT
+      remote: https://repo.git
+      revision: 09876543210987654321
+      ref: some-tag
+      specs:
+        gem-3 (3.2.1)
+
+    GIT
+      remote: https://other-repo.git
+      revision: 12345678901234567890
+      specs:
+        gem-4 (4.1.2)
   TXT
 
   describe '#call' do
@@ -64,6 +74,20 @@ RSpec.describe GemfileLocker::Locker do
       context 'and force: true' do
         let(:options) { {force: true} }
         its(:call) { should eq %(gem 'gem-1', '1.2.3.4', require: false\n  gem "gem-2", "2.3.4") }
+      end
+    end
+
+    context 'and gem has git source' do
+      it 'locks versions' do
+        expect(subject[<<-RUBY.strip_heredoc]).to eq <<-RUBY.strip_heredoc
+          gem 'gem-3', git: 'smth'
+          gem 'gem-4'
+          gem 'gem-4', tag: 'other-tag'
+        RUBY
+          gem 'gem-3', '3.2.1', git: 'smth', ref: 'some-tag'
+          gem 'gem-4', '4.1.2', ref: '1234567'
+          gem 'gem-4', '4.1.2', tag: 'other-tag'
+        RUBY
       end
     end
   end

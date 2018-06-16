@@ -22,6 +22,9 @@ module GemfileLocker
     require 'gemfile_locker/gem_entry/versions'
     prepend Versions
 
+    require 'gemfile_locker/gem_entry/git_ref'
+    prepend GitRef
+
     protected
 
     # Node with gem options, if present.

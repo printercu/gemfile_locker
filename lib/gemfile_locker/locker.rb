@@ -24,7 +24,7 @@ module GemfileLocker
       name = gem_entry.name
       spec = bundler_specs.find { |x| x.name == name }
       return unless spec
-      gem_entry.lock(version: prepare_version(spec.version))
+      gem_entry.lock(version: prepare_version(spec.version), git_ref: prepare_git_ref(spec))
     end
 
     def skip_gem?(gem_entry)
@@ -39,6 +39,12 @@ module GemfileLocker
         "~> #{segments.join('.')}"
       else
         version.to_s
+      end
+    end
+
+    def prepare_git_ref(spec)
+      if spec.source.is_a?(Bundler::Source::Git)
+        spec.source.options['ref'] || spec.source.revision[0...7]
       end
     end
   end
