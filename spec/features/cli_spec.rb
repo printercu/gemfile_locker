@@ -1,7 +1,7 @@
 require 'aruba/rspec'
 
 RSpec.describe GemfileLocker::CLI, type: :aruba do
-  subject { -> { run_simple "gemfile_locker #{action} #{args}" } }
+  subject { -> { run_command_and_stop "gemfile_locker #{action} #{args}" } }
   let(:args) { '' }
   let(:gemfile) { 'Gemfile' }
   before do
