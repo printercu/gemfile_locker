@@ -4,18 +4,16 @@ RSpec.describe GemfileLocker::CLI, type: :aruba do
   subject { -> { run_command_and_stop "gemfile_locker #{action} #{args}" } }
   let(:args) { '' }
   let(:gemfile) { 'Gemfile' }
+  let(:lockfile) { "#{gemfile}.lock" }
   before do
     write_file gemfile, read_fixture('Gemfile')
     aruba.config.activate_announcer_on_command_failure = [:stdout, :stderr]
   end
 
-  describe '#lock' do
-    let(:action) { :lock }
-    before { write_file "#{gemfile}.lock", read_fixture('Gemfile.lock') }
-
+  shared_examples 'lock' do |**options|
     it 'locks strictly' do
       should_not raise_error
-      expect(read('Gemfile').join("\n")).to eq <<-RUBY.strip_heredoc
+      expect(read(gemfile).join("\n")).to eq <<-RUBY.strip_heredoc
         source 'https://rubygems.org'
 
         gemspec
@@ -36,7 +34,7 @@ RSpec.describe GemfileLocker::CLI, type: :aruba do
       let(:args) { '-f' }
       it 'locks strictly' do
         should_not raise_error
-        expect(read('Gemfile').join("\n")).to eq <<-RUBY.strip_heredoc
+        expect(read(gemfile).join("\n")).to eq <<-RUBY.strip_heredoc
           source 'https://rubygems.org'
 
           gemspec
@@ -56,11 +54,12 @@ RSpec.describe GemfileLocker::CLI, type: :aruba do
 
     context 'with specified gems, loose mode and custom gemfile' do
       let(:args) { "gem-1 gem-5 -l minor -g #{gemfile}" }
-      let(:gemfile) { 'Gemfile-2' }
+      let(:gemfile) { options[:custom_gemfile] }
+      let(:lockfile) { options[:custom_lockfile] }
 
       it 'locks them with ~>' do
         should_not raise_error
-        expect(read('Gemfile-2').join("\n")).to eq <<-RUBY.strip_heredoc
+        expect(read(gemfile).join("\n")).to eq <<-RUBY.strip_heredoc
           source 'https://rubygems.org'
 
           gemspec
@@ -79,12 +78,23 @@ RSpec.describe GemfileLocker::CLI, type: :aruba do
     end
   end
 
-  describe '#unlock' do
-    let(:action) { :unlock }
+  describe '#lock' do
+    let(:action) { :lock }
+    before { write_file(lockfile, read_fixture('Gemfile.lock')) }
 
+    include_examples 'lock', custom_gemfile: 'Gemfile-2', custom_lockfile: 'Gemfile-2.lock'
+
+    context 'for bundler 2+' do
+      let(:gemfile) { 'gems.rb' }
+      let(:lockfile) { 'gems.locked' }
+      include_examples 'lock', custom_gemfile: 'gems-2.rb', custom_lockfile: 'gems-2.rb.lock'
+    end
+  end
+
+  shared_examples 'unlock' do |**options|
     it 'unlocks all' do
       should_not raise_error
-      expect(read('Gemfile').join("\n")).to eq <<-RUBY.strip_heredoc
+      expect(read(gemfile).join("\n")).to eq <<-RUBY.strip_heredoc
         source 'https://rubygems.org'
 
         gemspec
@@ -103,11 +113,11 @@ RSpec.describe GemfileLocker::CLI, type: :aruba do
 
     context 'with specified gems, custom gemfile' do
       let(:args) { "gem-1 gem-2 -g #{gemfile}" }
-      let(:gemfile) { 'Gemfile-2' }
+      let(:gemfile) { options[:custom_gemfile] }
 
       it 'unlocks them' do
         should_not raise_error
-        expect(read('Gemfile-2').join("\n")).to eq <<-RUBY.strip_heredoc
+        expect(read(gemfile).join("\n")).to eq <<-RUBY.strip_heredoc
           source 'https://rubygems.org'
 
           gemspec
@@ -123,6 +133,17 @@ RSpec.describe GemfileLocker::CLI, type: :aruba do
           end
         RUBY
       end
+    end
+  end
+
+  describe '#unlock' do
+    let(:action) { :unlock }
+
+    include_examples 'unlock', custom_gemfile: 'Gemfile-2'
+
+    context 'for bundler 2+' do
+      let(:gemfile) { 'gems.rb' }
+      include_examples 'unlock', custom_gemfile: 'gems-2.rb'
     end
   end
 end

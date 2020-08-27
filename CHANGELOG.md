@@ -1,3 +1,7 @@
+# 0.4.0
+
+- Support for `gems.rb` and `gems.locked`.
+
 # 0.3.1
 
 - Release dependency for bundler 2.0 support.

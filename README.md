@@ -39,14 +39,14 @@ Options:
   -f, [--force]                 # Overwrite version definitions
                                 # (By default it adds only missing version definitions)
   -g, [--gemfile=GEMFILE]       # Path to gemfile
-                                # Default: Gemfile
+                                # Default: Default: gems.rb or Gemfile (detected)
 
 gemfile_locker unlock [gem ...] [options] # Unock all or specified gems.
 
 Options:
   -e, [--except=one two three]  # List of gems to skip
   -g, [--gemfile=GEMFILE]       # Path to gemfile
-                                # Default: Gemfile
+                                # Default: Default: gems.rb or Gemfile (detected)
 ```
 
 ## Development
