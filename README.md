@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/gemfile_locker.svg)](http://badge.fury.io/rb/gemfile_locker)
 [![Code Climate](https://codeclimate.com/github/printercu/gemfile_locker/badges/gpa.svg)](https://codeclimate.com/github/printercu/gemfile_locker)
-[![Build Status](https://travis-ci.org/printercu/gemfile_locker.svg)](https://travis-ci.org/printercu/gemfile_locker)
+[![Build Status](https://app.travis-ci.com/printercu/gemfile_locker.svg?branch=master&status=unknown)](https://app.travis-ci.com/github/printercu/gemfile_locker)
 
 It can lock all (or selected) dependencies strictly or semi-strictly (with `~>`),
 so it gets safe to run `bundle update` anytime.

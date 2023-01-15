@@ -1,32 +1,38 @@
 AllCops:
+  TargetRubyVersion: 2.4
   Exclude:
   - tmp/**/*
   - spec/fixtures/*
 
-Style/Alias: {Enabled: false}
-Style/AlignParameters:
+Layout/ArgumentAlignment:
   # Disable, till rubocop supports combination of styles.
   # Use one of this styles where appropriate, keep it clean, compact and readable.
   Enabled: false
   # EnforcedStyle:
   # - with_first_parameter
   # - with_fixed_indentation
-Style/AndOr: {EnforcedStyle: conditionals}
-Style/ClosingParenthesisIndentation: {Enabled: false}
-Style/Documentation: {Enabled: false}
-Style/DotPosition: {EnforcedStyle: trailing}
-Style/FirstParameterIndentation: {EnforcedStyle: consistent}
-Style/IfUnlessModifier: {Enabled: false}
-Style/ModuleFunction: {Enabled: false}
-Style/MultilineOperationIndentation: {EnforcedStyle: indented}
-Style/NestedParenthesizedCalls: {Enabled: false}
-Style/PredicateName: {Enabled: false}
-Style/SignalException: {EnforcedStyle: only_raise}
-Style/SpaceInsideHashLiteralBraces: {EnforcedStyle: no_space}
-Style/TrailingCommaInArguments: {Enabled: false}
-Style/TrailingCommaInLiteral: {EnforcedStyleForMultiline: comma}
+Layout/ClosingParenthesisIndentation: {Enabled: false}
+Layout/DotPosition: {EnforcedStyle: trailing}
+Layout/EmptyLineAfterGuardClause: {Enabled: false}
+Layout/FirstParameterIndentation: {EnforcedStyle: consistent}
+Layout/MultilineOperationIndentation: {EnforcedStyle: indented}
+Layout/SpaceInsideHashLiteralBraces: {EnforcedStyle: no_space}
+Layout/LineLength: {Max: 100}
 
 Metrics/AbcSize: {Max: 21}
-Metrics/LineLength: {Max: 100}
+Metrics/BlockLength: {Exclude: [spec/**/*]}
 Metrics/MethodLength: {Max: 30}
 Metrics/CyclomaticComplexity: {Max: 8}
+
+Naming/PredicateName: {Enabled: false}
+
+Style/Alias: {Enabled: false}
+Style/AndOr: {EnforcedStyle: conditionals}
+Style/Documentation: {Enabled: false}
+Style/IfUnlessModifier: {Enabled: false}
+Style/ModuleFunction: {Enabled: false}
+Style/NestedParenthesizedCalls: {Enabled: false}
+Style/SignalException: {EnforcedStyle: only_raise}
+Style/TrailingCommaInArguments: {Enabled: false}
+Style/TrailingCommaInArrayLiteral: {EnforcedStyleForMultiline: comma}
+Style/TrailingCommaInHashLiteral: {EnforcedStyleForMultiline: comma}

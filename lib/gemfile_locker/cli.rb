@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'thor'
 
 module GemfileLocker
@@ -10,7 +12,7 @@ module GemfileLocker
     method_option :loose,
       aliases: '-l',
       lazy_default: 'patch',
-      enum: %w(major minor patch full),
+      enum: %w[major minor patch full],
       desc: 'Lock with `~>`. Optionaly provide level (default to patch)'
     method_option :except,
       aliases: '-e',

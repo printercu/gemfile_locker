@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'parser'
 require 'parser/current'
 require 'gemfile_locker/gem_entry'

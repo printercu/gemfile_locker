@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module GemfileLocker
   class GemEntry
     attr_reader :rewriter, :node
@@ -12,12 +14,10 @@ module GemfileLocker
     end
 
     # Overriden in prepended modules.
-    def lock(**options)
-    end
+    def lock(**options); end
 
     # Overriden in prepended modules.
-    def unlock
-    end
+    def unlock; end
 
     require 'gemfile_locker/gem_entry/versions'
     prepend Versions

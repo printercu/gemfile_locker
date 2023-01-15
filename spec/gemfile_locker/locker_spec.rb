@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 RSpec.describe GemfileLocker::Locker do
-  let(:lockfile) { <<-TXT.strip_heredoc }
+  let(:lockfile) { <<~TXT }
     GEM
       remote: https://rubygems.org/
       specs:
@@ -79,7 +81,7 @@ RSpec.describe GemfileLocker::Locker do
 
     context 'and gem has git source' do
       it 'locks versions' do
-        expect(subject[<<-RUBY.strip_heredoc]).to eq <<-RUBY.strip_heredoc
+        expect(subject[<<~RUBY]).to eq <<~RUBY
           gem 'gem-3', git: 'smth'
           gem 'gem-4'
           gem 'gem-4', tag: 'other-tag'

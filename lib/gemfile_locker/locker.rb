@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'bundler'
 
 module GemfileLocker
@@ -43,9 +45,8 @@ module GemfileLocker
     end
 
     def prepare_git_ref(spec)
-      if spec.source.is_a?(Bundler::Source::Git)
-        spec.source.options['ref'] || spec.source.revision[0...7]
-      end
+      return unless spec.source.is_a?(Bundler::Source::Git)
+      spec.source.options['ref'] || spec.source.revision[0...7]
     end
   end
 end

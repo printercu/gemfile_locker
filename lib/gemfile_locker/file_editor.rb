@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module GemfileLocker
   class FileEditor
     attr_reader :path, :processor

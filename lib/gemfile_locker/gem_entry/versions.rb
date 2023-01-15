@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module GemfileLocker
   class GemEntry
     module Versions
-      EXTRA_VERSION_REGEXP = /\A[><]/
+      EXTRA_VERSION_REGEXP = /\A[><]/.freeze
 
-      def lock(options)
+      def lock(**options)
         version = options[:version]
         set_version(version) if version
         super
@@ -18,7 +20,7 @@ module GemfileLocker
         version_nodes.any?
       end
 
-      def set_version(version) # rubocop:disable AccessorMethodName
+      def set_version(version) # rubocop:disable Naming/AccessorMethodName
         version_nodes = self.version_nodes
         if version_nodes.any?
           replace_string_node(version_nodes.first, version)
