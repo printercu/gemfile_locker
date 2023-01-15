@@ -13,7 +13,7 @@ RSpec.describe GemfileLocker::CLI, type: :aruba do
   shared_examples 'lock' do |**options|
     it 'locks strictly' do
       should_not raise_error
-      expect(read(gemfile).join("\n")).to eq <<-RUBY.strip_heredoc
+      expect(read(gemfile).join("\n")).to eq <<~RUBY
         source 'https://rubygems.org'
 
         gemspec
@@ -34,7 +34,7 @@ RSpec.describe GemfileLocker::CLI, type: :aruba do
       let(:args) { '-f' }
       it 'locks strictly' do
         should_not raise_error
-        expect(read(gemfile).join("\n")).to eq <<-RUBY.strip_heredoc
+        expect(read(gemfile).join("\n")).to eq <<~RUBY
           source 'https://rubygems.org'
 
           gemspec
@@ -59,7 +59,7 @@ RSpec.describe GemfileLocker::CLI, type: :aruba do
 
       it 'locks them with ~>' do
         should_not raise_error
-        expect(read(gemfile).join("\n")).to eq <<-RUBY.strip_heredoc
+        expect(read(gemfile).join("\n")).to eq <<~RUBY
           source 'https://rubygems.org'
 
           gemspec
@@ -94,7 +94,7 @@ RSpec.describe GemfileLocker::CLI, type: :aruba do
   shared_examples 'unlock' do |**options|
     it 'unlocks all' do
       should_not raise_error
-      expect(read(gemfile).join("\n")).to eq <<-RUBY.strip_heredoc
+      expect(read(gemfile).join("\n")).to eq <<~RUBY
         source 'https://rubygems.org'
 
         gemspec
@@ -117,7 +117,7 @@ RSpec.describe GemfileLocker::CLI, type: :aruba do
 
       it 'unlocks them' do
         should_not raise_error
-        expect(read(gemfile).join("\n")).to eq <<-RUBY.strip_heredoc
+        expect(read(gemfile).join("\n")).to eq <<~RUBY
           source 'https://rubygems.org'
 
           gemspec

@@ -1,3 +1,7 @@
+# 0.4.1
+
+- Ruby 3 support.
+
 # 0.4.0
 
 - Support for `gems.rb` and `gems.locked`.

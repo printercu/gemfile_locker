@@ -1,7 +1,6 @@
 require 'pathname'
 require 'pry'
 require 'rspec/its'
-require 'aruba/extensions/string/strip'
 
 if ENV['CI']
   require 'coveralls'

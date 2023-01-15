@@ -3,7 +3,7 @@ module GemfileLocker
     module Versions
       EXTRA_VERSION_REGEXP = /\A[><]/
 
-      def lock(options)
+      def lock(**options)
         version = options[:version]
         set_version(version) if version
         super

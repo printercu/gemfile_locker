@@ -1,7 +1,7 @@
 module GemfileLocker
   class GemEntry
     module GitRef
-      def lock(options)
+      def lock(**options)
         git_ref = options[:git_ref]
         set_git_ref(git_ref) if git_ref && !has_git_tag?
         super
