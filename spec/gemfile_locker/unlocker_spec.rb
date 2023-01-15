@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe GemfileLocker::Unlocker do
   describe '#call' do
     subject { ->(val = input, opt = options) { described_class.new(opt).call(val) } }

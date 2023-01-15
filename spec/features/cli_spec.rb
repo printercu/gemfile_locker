@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'aruba/rspec'
 
 RSpec.describe GemfileLocker::CLI, type: :aruba do
@@ -7,7 +9,7 @@ RSpec.describe GemfileLocker::CLI, type: :aruba do
   let(:lockfile) { "#{gemfile}.lock" }
   before do
     write_file gemfile, read_fixture('Gemfile')
-    aruba.config.activate_announcer_on_command_failure = [:stdout, :stderr]
+    aruba.config.activate_announcer_on_command_failure = %i[stdout stderr]
   end
 
   shared_examples 'lock' do |**options|

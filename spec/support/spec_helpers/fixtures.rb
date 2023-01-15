@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SpecHelpers
   module Fixtures
     def read_fixture(*parts)

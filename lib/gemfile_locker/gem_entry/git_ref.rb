@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module GemfileLocker
   class GemEntry
     module GitRef
@@ -16,7 +18,7 @@ module GemfileLocker
         git_option_nodes.any? { |pair| pair.children[0].children[0] == :tag }
       end
 
-      def set_git_ref(ref) # rubocop:disable AccessorMethodName
+      def set_git_ref(ref) # rubocop:disable Naming/AccessorMethodName
         ref_node = ref_option_node
         return replace_string_node(ref_node.children[1], ref) if ref_node
         git_nodes = git_option_nodes
@@ -35,11 +37,11 @@ module GemfileLocker
       def ref_option_node
         return unless options_node
         options_node.children.find do |pair|
-          pair.children[0].to_sexp_array == [:sym, :ref]
+          pair.children[0].to_sexp_array == %i[sym ref]
         end
       end
 
-      RELATED_OPTIONS = /\A(git*|branch|tag)\z/
+      RELATED_OPTIONS = /\A(git*|branch|tag)\z/.freeze
 
       def git_option_nodes
         return [] unless options_node
